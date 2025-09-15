@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-// const URI = "mongodb+srv://kratikaNode:zjdB7N5Bva4OEV41@devnode.s7zac.mongodb.net/devTinder";
+// Prefer environment variable for DB connection when available (e.g., Vercel)
 const connectDb = async ()=>{
-    await mongoose.connect("mongodb://localhost:27017/devTinder");
+    const connectionString =  "mongodb://localhost:27017/devTinder";
+    await mongoose.connect(connectionString);
 };
 
 

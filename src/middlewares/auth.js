@@ -8,7 +8,7 @@ const userAuth = async (req, res, next) => {
         if (!token) {
             return res.status(401).send("You are unathourized")
         }
-        const decodedMessage = await jwt.verify(token, "DevTinder$2629");
+        const decodedMessage = await jwt.verify(token, JWT_SECRET || "DevTinder$2629");
         const { _id } = decodedMessage;
 
         const user = await userModel.findById(_id);
