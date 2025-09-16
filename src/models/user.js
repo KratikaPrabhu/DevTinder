@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator')
 const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET || "DevTinder$2629";
 const userschema = mongoose.Schema({
     firstName :{
         type:String,
@@ -48,7 +49,7 @@ const userschema = mongoose.Schema({
 )
 
 userschema.methods.getJWT = function () {
-    return jwt.sign({ _id: this._id }, "DevTinder$2629", { expiresIn: "7d" });
+    return jwt.sign({ _id: this._id }, jwtSecret, { expiresIn: "7d" });
 }
 
 const userModel =mongoose.model("user",userschema);

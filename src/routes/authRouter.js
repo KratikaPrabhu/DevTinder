@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET || "DevTinder$2629";
 const { validateSignUpdata} = require('../utils/validate');
 const bcrypt = require("bcrypt");
 const { userModel } = require('../models/user');
@@ -37,7 +38,7 @@ router.post("/login", async (req, res) => {
         }
         const isPasswordValid = await bcrypt.compare(Password, user.Password);
         if (isPasswordValid) {
-            const token = jwt.sign({ _id: user._id }, "DevTinder$2629", { expiresIn: "7d" });
+            const token = jwt.sign({ _id: user._id }, jwtSecret, { expiresIn: "7d" });
            res.cookie("token", token, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
            res.send(user);
         } else {
