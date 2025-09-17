@@ -19,7 +19,7 @@ const requestRouter = require('./routes/request')
 const userRouter = require('./routes/userrouter')
 
 // Health check
-app.get('/health', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).send('OK');
 });
 
