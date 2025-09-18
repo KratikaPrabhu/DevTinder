@@ -6,24 +6,13 @@ const {connectDb} = require('./config/database');
 const cookieParser = require("cookie-parser");
 const cors = require("cors")
 
-const allowedOrigins = [
-  "http://localhost:5173",                  
-  "http://localhost:5174",                 
-  "https://devtinder-frontend-sepia.vercel.app"  
-];
+app.use(cors({
+    origin: process.env.CORS_ORIGIN ,
+    credentials : true,
+}));
+app.use(express.json());
+app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,  // allow cookies & auth headers
-  })
-);
 const router = require('./routes/authRouter')
 const profileRouter = require('./routes/profile')
 const requestRouter = require('./routes/request')
