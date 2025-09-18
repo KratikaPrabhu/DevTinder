@@ -9,9 +9,17 @@ const cors = require("cors")
 const allowedOrigins = process.env.CORS_ORIGIN.split(",");
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+   
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 }));
+
 
 app.use(express.json());
 app.use(cookieParser());
