@@ -1,10 +1,10 @@
-import dotenv from "dotenv";
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const {connectDb} = require('./config/database');
 const cookieParser = require("cookie-parser");
 const cors = require("cors")
-dotenv.config();
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN ,
