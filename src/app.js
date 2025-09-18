@@ -6,10 +6,13 @@ const {connectDb} = require('./config/database');
 const cookieParser = require("cookie-parser");
 const cors = require("cors")
 
+const allowedOrigins = process.env.CORS_ORIGIN.split(",");
+
 app.use(cors({
-    origin: process.env.CORS_ORIGIN ,
-    credentials : true,
+  origin: allowedOrigins,
+  credentials: true,
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
